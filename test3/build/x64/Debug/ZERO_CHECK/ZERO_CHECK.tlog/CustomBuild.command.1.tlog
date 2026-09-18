@@ -1,0 +1,10 @@
+^C:\USERS\35474\DESKTOP\GIT仓库合集\CMAKE\TEST3\BUILD\CMAKEFILES\0F85038D23D2DA410973A52B98316DE3\GENERATE.STAMP.RULE
+setlocal
+D:\Software\Cmake\bin\cmake.exe -SC:/Users/35474/Desktop/Git仓库合集/CMake/test3 -BC:/Users/35474/Desktop/Git仓库合集/CMake/test3/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/35474/Desktop/Git仓库合集/CMake/test3/build/test3.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
