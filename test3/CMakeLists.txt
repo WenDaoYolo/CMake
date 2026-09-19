@@ -1,4 +1,4 @@
-#使用当前CMakeLists.txt所需的最低版本
+#使用CMakeLists.txt所需的最低版本
 cmake_minimum_required(VERSION 4.2.1)
 
 #项目的名称
@@ -16,18 +16,10 @@ ${变量}
 #生成可执行文件，需要指定依赖的源文件
 add_executable(可执行文件 源文件...)
 
-#windows平台默认指定位MSVC版本，可指定为MINGW版本
 
 
-#指定所有target的头文件搜索路径(如：动态/静态库、可执行文件相关的源文件，编译时都会去指定目录下搜索)
-include_directories(路径...)
 
-#指定某个target的头文件搜索路径
-target_include_directories(target 路径...)
-
-#生成链接库文件，需要指定类型和依赖的源文件
-#类型：shared为动态库 static为静态库
-add_library(库文件 类型 源文件...)
+>>#windows平台默认指定位MSVC版本，可指定为MINGW版本
 
 
 #变量除了可以存储文件，还可以表示某个或多个路径，CMake定义的变量有:
@@ -67,7 +59,25 @@ VERSION	指定共享库的版本号。	用于 SHARED 库
 SOVERSION	指定共享库的 ABI 版本号。	用于 SHARED 库
 INSTALL_RPATH	安装后二进制文件使用的 RPATH。	控制运行时库搜索路径
 
-#为target指定依赖的链接库
+
+#指定所有target的头文件搜索路径(如：动态/静态库、可执行文件相关的源文件，编译时都会去指定目录下搜索)
+include_directories(路径...)
+
+#指定某个target的头文件搜索路径
+target_include_directories(target 路径...)
+
+#生成链接库文件，需要指定类型和依赖的源文件
+#类型：shared为动态库 static为静态库
+add_library(库文件 类型 源文件...)
+
+#windows中的动态库还需要对应的导入库(.lib)，而Linux中不需要
+#导入库包含各种符号声明，用来告知加载器去哪找，所以在生成动态库时
+#还需要指定导入库的输出路径，而使用第三方动态库时
+
+#为所有target指定依赖的链接库
+link_libraries(链接库...)
+
+#为某个target指定依赖的链接库
 target_link_libraries(target 链接库...)
 
 #寻找默认路径下指定的链接库，并将其保存到变量中(Linux库的检索路径：/usr/lib)
